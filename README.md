@@ -1,1 +1,1 @@
-Some basic compose files I use for self hosted services.
+Some basic docker-compose files I use for self hosted services. Most of it is basically just default stuff when setting things up, these are mostly just to have a backup!
