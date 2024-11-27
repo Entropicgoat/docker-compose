@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    # This is to keep it simple when using tailscale split dns.
+    networks:
+      tailscale_default:
+        ipv4_address: 172.22.0.3
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - $DATA_DIR:/data
+      - $LETSENCRYPT_DIR:/etc/letsencrypt
+networks:
+  internal_default:
+    external: true
+  tailscale_default:
+    external: true

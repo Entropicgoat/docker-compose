@@ -1,0 +1,54 @@
+services:
+  perlite:
+    image: sec77/perlite:latest
+    container_name: bitesized_perlite
+    restart: unless-stopped
+    environment:
+      - NOTES_PATH=bite-sized-battalion
+      - HIDE_FOLDERS=docs,private,trash,@eaDir
+      - LINE_BREAKS=true
+      - ABSOLUTE_PATHS=false
+      - ALLOWED_FILE_LINK_TYPES=pdf,mp4
+      - DISABLE_POP_HOVER=false
+      - SHOW_TOC=true
+      - SHOW_LOCAL_GRAPH=true
+      - HOME_FILE=README
+      - FONT_SIZE=15
+      - HTML_SAFE_MODE=true
+      - TEMP_PATH=/tmp
+      - SITE_TITLE=Bite-sized Battalion
+      - SITE_TYPE=article
+      - SITE_URL=
+      - SITE_IMAGE=
+      - SITE_DESC=
+      - SITE_NAME=Bite-sized Battalion wiki
+      - SITE_TWITTER=x.com
+      - SITE_LOGO=perlite.svg
+      - SITE_HOMEPAGE=
+    volumes:
+      - DnD-Bitesized:/var/www/perlite/bite-sized-battalion:ro
+    networks:
+      tailscale_default:
+        ipv4_address: 172.22.0.11
+
+  web:
+    image: nginx:stable
+    container_name: bitesized_web
+    restart: unless-stopped
+    volumes:
+      - $PERLITE_BITESIZED_DIR:/etc/nginx/conf.d/default.conf:ro
+    volumes_from: 
+      - perlite       
+    depends_on:
+      - perlite
+    networks:
+      tailscale_default:
+        ipv4_address: 172.22.0.10
+
+volumes:
+  DnD-Bitesized:
+    external: true
+
+networks:
+  tailscale_default:
+    external: true

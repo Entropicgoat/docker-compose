@@ -1,0 +1,1 @@
+Some basic compose files I use for self hosted services.
