@@ -6,7 +6,7 @@ services:
     # For reverse proxy with tailscale.
     networks:
       tailscale_default:
-        ipv4_address: 172.22.0.20
+        ipv4_address: $DOCKER_NETWORK_TS_ADDRESS
     volumes:
       - $SEARXNG_DIR:/etc/searxng:rw
     environment:

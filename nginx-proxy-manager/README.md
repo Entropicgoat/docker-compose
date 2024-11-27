@@ -1,0 +1,1 @@
+Very simple setup, has a set ip to be able to access it via a published network in tailscale.

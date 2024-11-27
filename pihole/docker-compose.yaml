@@ -5,10 +5,9 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    # Just added in to keep it simple with reverse proxy.
     networks:
       internal_default:
-        ipv4_address: 172.30.0.100
+        ipv4_address: $DOCKER_NETWORK_ADDRESS
     environment:
       TZ: $TZ
       WEBPASSWORD: $PASS

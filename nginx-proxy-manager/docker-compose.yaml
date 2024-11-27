@@ -5,7 +5,7 @@ services:
     # This is to keep it simple when using tailscale split dns.
     networks:
       tailscale_default:
-        ipv4_address: 172.22.0.3
+        ipv4_address: $DOCKER_NETWORK_TS_ADDRESS
     restart: unless-stopped
     ports:
       - '80:80'
@@ -15,7 +15,5 @@ services:
       - $DATA_DIR:/data
       - $LETSENCRYPT_DIR:/etc/letsencrypt
 networks:
-  internal_default:
-    external: true
   tailscale_default:
     external: true

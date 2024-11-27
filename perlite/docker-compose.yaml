@@ -29,7 +29,7 @@ services:
       - DnD-Bitesized:/var/www/perlite/bite-sized-battalion:ro
     networks:
       tailscale_default:
-        ipv4_address: 172.22.0.11
+        ipv4_address: $DOCKER_NETWORK_TS_ADDRESS
 
   web:
     image: nginx:stable
@@ -43,7 +43,7 @@ services:
       - perlite
     networks:
       tailscale_default:
-        ipv4_address: 172.22.0.10
+        ipv4_address: $DOCKER_NETWORK_TS_ADDRESS_WEB
 
 volumes:
   DnD-Bitesized:
