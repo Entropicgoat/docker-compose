@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    # Keeping it clean and clear for the reverse proxy.
+    networks:
+      internal_default:
+          ipv4_address: $DOCKER_NETWORK_ADDRESS
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - $HOMARR_CONFIGS:/app/data/configs
+      - $HOMARR_ICONS:/app/public/icons
+      - $HOMARR_DATA:/data
+networks:
+  internal_default:
+    external: true

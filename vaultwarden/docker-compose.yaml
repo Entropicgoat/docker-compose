@@ -1,0 +1,16 @@
+version: "2"
+services:
+    vaultwarden:
+      image: vaultwarden/server:latest
+      container_name: vaultwarden
+      # Keeping it clean and clear for the reverse proxy.
+      networks:
+        internal_default:
+          ipv4_address: $DOCKER_NETWORK_ADDRESS
+      volumes:
+        - $VAULT_DIR:/data/
+      restart: unless-stopped
+
+networks:
+  internal_default:
+    external: true
